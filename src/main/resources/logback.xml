@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <property name="app.log.dir" value="D:/pleiades/workspace/employee/log" />
+    <property name="app.log.dir" value="D:/pleiades/workspace/employee/logs" />
 
     <appender name="APPLICATION_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${app.log.dir:-log}/employee-application.log</file>
