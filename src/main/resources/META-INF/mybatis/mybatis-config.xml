@@ -18,16 +18,16 @@
     </settings>
 
     <typeAliases>
-        <package name="com.example.employee.domain.model" />
-        <package name="com.example.employee.domain.repository" />
+        <package name="org.cios.employee.domain.model" />
+        <package name="org.cios.employee.domain.repository" />
 <!--
-        <package name="com.example.employee.infra.mybatis.typehandler" />
+        <package name="org.cios.employee.infra.mybatis.typehandler" />
 -->
     </typeAliases>
 
     <typeHandlers>
 <!--
-        <package name="com.example.employee.infra.mybatis.typehandler" />
+        <package name="org.cios.employee.infra.mybatis.typehandler" />
 -->
     </typeHandlers>
 

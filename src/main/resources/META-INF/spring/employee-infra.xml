@@ -16,6 +16,6 @@
     </bean>
 
     <!-- scan for Mappers -->
-    <mybatis:scan base-package="com.example.employee.domain.repository" />
+    <mybatis:scan base-package="org.cios.employee.domain.repository" />
 
 </beans>

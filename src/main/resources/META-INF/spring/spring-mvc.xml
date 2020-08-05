@@ -28,7 +28,7 @@
 
     <mvc:default-servlet-handler />
 
-    <context:component-scan base-package="com.example.employee.app" />
+    <context:component-scan base-package="org.cios.employee.app" />
 
     <mvc:resources mapping="/resources/**"
         location="/resources/,classpath:META-INF/resources/"

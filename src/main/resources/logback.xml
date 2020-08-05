@@ -34,7 +34,7 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="com.example.employee">
+    <logger name="org.cios.employee">
         <level value="debug" />
     </logger>
 
