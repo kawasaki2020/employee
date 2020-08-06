@@ -2,9 +2,9 @@ package org.cios.employee.domain.service.Impl;
 
 import javax.inject.Inject;
 
-import org.cios.employee.domain.model.Empolyee;
-import org.cios.employee.domain.repository.EmpolyeeRepository;
-import org.cios.employee.domain.service.EmpolyeeService;
+import org.cios.employee.domain.model.Member;
+import org.cios.employee.domain.repository.MemberRepository;
+import org.cios.employee.domain.service.MemberService;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,9 +12,9 @@ import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 
 @Transactional
 @Service
-public class EmpolyeeServiceImpl implements EmpolyeeService {
+public class MemberServiceImpl implements MemberService {
 	@Inject
-	EmpolyeeRepository empolyeeRepository;
+	MemberRepository memberRepository;
 
 	@Inject
 	JodaTimeDateFactory dateFactory;
@@ -45,8 +45,8 @@ public class EmpolyeeServiceImpl implements EmpolyeeService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Empolyee getMember(String employeeId) {
-		return empolyeeRepository.findOne(employeeId);
+	public Member getMember(String memberId) {
+		return memberRepository.findOne(memberId);
 	}
 //
 //	@Override

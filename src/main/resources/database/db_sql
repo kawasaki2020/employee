@@ -1,14 +1,14 @@
--- Sequence: employee_id_seq
+-- Sequence: member_id_seq
 
--- DROP SEQUENCE employee_id_seq;
+-- DROP SEQUENCE member_id_seq;
 
-CREATE SEQUENCE employee_id_seq
+CREATE SEQUENCE member_id_seq
   INCREMENT 1
   MINVALUE 1
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
-ALTER TABLE employee_id_seq
+ALTER TABLE member_id_seq
   OWNER TO postgres;
 
 
@@ -19,14 +19,14 @@ ALTER TABLE employee_id_seq
 CREATE TABLE employee
 (
   id serial NOT NULL,
-  employee_id character(7) NOT NULL, -- 社員番号 年度+三桁番号
+  member_id character(7) NOT NULL, -- 社員番号 年度+三桁番号
   company_mail character varying(256), -- 公司メール
   my_mail character varying(256), -- 个人メール
   basically double precision, -- 基本給
   membership character(1), -- 1:正社員/2:契約社員/3:役員
   employment_insurance double precision, -- 雇用保険
   health_insurance double precision, -- 健康保険
-  employee_pension double precision, -- 厚生年金
+  member_pension double precision, -- 厚生年金
   upper_limit_time integer, -- 上限時間
   minimum_time integer, -- 下限時間
   getpaid boolean, -- 有給取得
@@ -40,21 +40,21 @@ CREATE TABLE employee
   department_number integer, -- 部門番号
   created timestamp without time zone NOT NULL DEFAULT now(),
   updated timestamp without time zone NOT NULL DEFAULT now(),
-  CONSTRAINT employee_pkey PRIMARY KEY (employee_id)
+  CONSTRAINT employee_pkey PRIMARY KEY (member_id)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE employee
   OWNER TO postgres;
-COMMENT ON COLUMN employee.employee_id IS '社員番号 年度+三桁番号';
+COMMENT ON COLUMN employee.member_id IS '社員番号 年度+三桁番号';
 COMMENT ON COLUMN employee.company_mail IS '公司メール';
 COMMENT ON COLUMN employee.my_mail IS '个人メール';
 COMMENT ON COLUMN employee.basically IS '基本給';
 COMMENT ON COLUMN employee.membership IS '1:正社員/2:契約社員/3:役員';
 COMMENT ON COLUMN employee.employment_insurance IS '雇用保険';
 COMMENT ON COLUMN employee.health_insurance IS '健康保険';
-COMMENT ON COLUMN employee.employee_pension IS '厚生年金';
+COMMENT ON COLUMN employee.member_pension IS '厚生年金';
 COMMENT ON COLUMN employee.upper_limit_time IS '上限時間';
 COMMENT ON COLUMN employee.minimum_time IS '下限時間';
 COMMENT ON COLUMN employee.getpaid IS '有給取得';

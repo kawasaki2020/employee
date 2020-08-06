@@ -1,10 +1,10 @@
 package org.cios.employee.domain.repository;
 
-import org.cios.employee.domain.model.Empolyee;
+import org.cios.employee.domain.model.Member;
 
-public interface EmpolyeeRepository {
+public interface MemberRepository {
 
-	Empolyee findOne(String employeeId);
+	Member findOne(String memberId);
 //
 //	List<Member> findAll();
 //

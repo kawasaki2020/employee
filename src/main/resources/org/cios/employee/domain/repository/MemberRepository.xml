@@ -3,17 +3,17 @@
     "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.cios.employee.domain.repository.EmpolyeeRepository">
+<mapper namespace="org.cios.employee.domain.repository.MemberRepository">
 
-    <resultMap id="empolyeeResultMap" type="Empolyee">
-        <id property="employeeId" column="employee_id" />
+    <resultMap id="memberResultMap" type="Member">
+        <id property="memberId" column="member_id" />
         <result property="companyMail" column="company_mail" />
         <result property="myMail" column="my_mail" />
         <result property="basically" column="basically" />
         <result property="membership" column="membership" />
         <result property="employmentInsurance" column="employment_insurance" />
         <result property="healthInsurance" column="health_insurance" />
-        <result property="employeePension" column="employee_pension" />
+        <result property="employeePension" column="member_pension" />
         <result property="upperLmitTime" column="upper_limit_time" />
         <result property="minimumTime" column="minimum_time" />
         <result property="getPaid" column="getpaid" />
@@ -27,17 +27,17 @@
         <result property="departmentNumber" column="department_number" />
     </resultMap>
 
-    <select id="findOne" parameterType="string" resultMap="empolyeeResultMap">
+    <select id="findOne" parameterType="string" resultMap="memberResultMap">
     <![CDATA[
         SELECT
-            employee_id,
+            "member_id",
             company_mail,
             my_mail,
             basically,
             membership,
             employment_insurance,
             health_insurance,
-            employee_pension,
+            member_pension,
             upper_limit_time,
             minimum_time,
             getpaid,
@@ -52,7 +52,7 @@
         FROM
             employee
         WHERE
-            employee_id = #{todoId}
+            member_id = #{memberId}
     ]]>
     </select>
 

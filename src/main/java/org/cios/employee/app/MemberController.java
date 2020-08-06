@@ -4,9 +4,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import org.cios.employee.app.form.EmpolyeeForm;
-import org.cios.employee.domain.model.Empolyee;
-import org.cios.employee.domain.service.EmpolyeeService;
+import org.cios.employee.app.form.MemberForm;
+import org.cios.employee.domain.service.MemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,28 +13,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
-public class EmpolyeeController {
+public class MemberController {
 
-	private static final Logger logger = LoggerFactory.getLogger(EmpolyeeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Inject
-	EmpolyeeService empolyeeService;
+	MemberService memberService;
 
 	@ModelAttribute
-	public EmpolyeeForm setUpForm() {
-		EmpolyeeForm form = new EmpolyeeForm();
+	public MemberForm setUpForm() {
+		MemberForm form = new MemberForm();
 		return form;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String getMember(Locale locale,  Model model) {
-		Empolyee empolyee = empolyeeService.getMember("1");
-
+	//http://localhost:8080/employee/getMember?employeeId=1
+	@RequestMapping(value = "/getMember", method = RequestMethod.GET)
+	public String getMember(@RequestParam String memberId, Locale locale, Model model) {
+		model.addAttribute("member", memberService.getMember(memberId));
 		return "welcome/home";
 	}
 

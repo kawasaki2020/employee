@@ -6,10 +6,11 @@ import java.time.LocalDate;
 import lombok.Data;
 
 @Data
-public class Empolyee implements Serializable {
+@SuppressWarnings("unused")
+public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// 社員番号 年度+三桁番号
-	private String employeeId;
+	private String memberId;
 	//公司メール
 	private String companyMail;
 	//个人メール
@@ -23,7 +24,7 @@ public class Empolyee implements Serializable {
 	//健康保険
 	private Double healthInsurance;
 	//厚生年金
-	private Double employeePension;
+	private Double memberPension;
 	//上限時間
 	private Integer upperLmitTime;
 	//下限時間

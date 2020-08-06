@@ -1,13 +1,13 @@
 package org.cios.employee.domain.service;
 
-import org.cios.employee.domain.model.Empolyee;
+import org.cios.employee.domain.model.Member;
 
-public interface EmpolyeeService {
+public interface MemberService {
 //	List<Member> findAll();
 //
 //	Page<Member> searchMembers(String name, Pageable pageable);
 
-	Empolyee getMember(String employeeId);
+	Member getMember(String memberId);
 //
 //	Member createMember(Member creatingMember);
 //
