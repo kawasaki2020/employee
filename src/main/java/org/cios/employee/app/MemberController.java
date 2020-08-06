@@ -29,7 +29,7 @@ public class MemberController {
 		return form;
 	}
 
-	//http://localhost:8080/employee/getMember?employeeId=1
+	//http://localhost:8080/employee/getMember?memberId=1
 	@RequestMapping(value = "/getMember", method = RequestMethod.GET)
 	public String getMember(@RequestParam String memberId, Locale locale, Model model) {
 		model.addAttribute("member", memberService.getMember(memberId));
