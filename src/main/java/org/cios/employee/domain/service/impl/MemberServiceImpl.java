@@ -1,4 +1,4 @@
-package org.cios.employee.domain.service.Impl;
+package org.cios.employee.domain.service.impl;
 
 import javax.inject.Inject;
 
