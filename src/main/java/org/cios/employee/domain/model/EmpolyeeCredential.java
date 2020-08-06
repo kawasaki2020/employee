@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import org.joda.time.DateTime;
 
-public class MemberCredential implements Serializable {
+public class EmpolyeeCredential implements Serializable {
 
-    private String memberId;
+    private String employeeId;
 
     private String signId;
 
@@ -21,11 +21,11 @@ public class MemberCredential implements Serializable {
     private long version;
 
     public String getMemberId() {
-        return memberId;
+        return employeeId;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setMemberId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getSignId() {

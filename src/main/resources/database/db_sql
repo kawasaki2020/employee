@@ -19,11 +19,11 @@ ALTER TABLE employee_id_seq
 CREATE TABLE employee
 (
   id serial NOT NULL,
-  employee_id integer NOT NULL, -- 社員番号 年度+三桁番号
+  employee_id character(7) NOT NULL, -- 社員番号 年度+三桁番号
   company_mail character varying(256), -- 公司メール
   my_mail character varying(256), -- 个人メール
   basically double precision, -- 基本給
-  membership integer, -- 1:正社員/2:契約社員/3:役員
+  membership character(1), -- 1:正社員/2:契約社員/3:役員
   employment_insurance double precision, -- 雇用保険
   health_insurance double precision, -- 健康保険
   employee_pension double precision, -- 厚生年金
@@ -34,7 +34,7 @@ CREATE TABLE employee
   hourly_wagea double precision, -- 時給
   joining_time date, -- 入社時間
   leave_time date, -- 退社時間
-  status integer, -- 状態
+  status character(1), -- 状態
   deletion_category character(1), -- 削除区分
   position_classification integer, -- 1:試用期/2:社員/3:主任/4:マネージャー/5:副部長/6:部長/7:本部長/8:役員/9:社長
   department_number integer, -- 部門番号

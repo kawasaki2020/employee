@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.cios.employee.domain.repository.EmpolyeeRepository">
+
+    <resultMap id="empolyeeResultMap" type="Empolyee">
+        <id property="employeeId" column="employee_id" />
+        <result property="companyMail" column="company_mail" />
+        <result property="myMail" column="my_mail" />
+        <result property="basically" column="basically" />
+        <result property="membership" column="membership" />
+        <result property="employmentInsurance" column="employment_insurance" />
+        <result property="healthInsurance" column="health_insurance" />
+        <result property="employeePension" column="employee_pension" />
+        <result property="upperLmitTime" column="upper_limit_time" />
+        <result property="minimumTime" column="minimum_time" />
+        <result property="getPaid" column="getpaid" />
+        <result property="remainingPaid" column="remaining_paid" />
+        <result property="hourlyWagea" column="hourly_wagea" />
+        <result property="joiningTime" column="joining_time" />
+        <result property="leaveTime" column="leave_time" />
+        <result property="status" column="status" />
+        <result property="deletionCategory" column="deletion_category" />
+        <result property="positionClassification" column="position_classification" />
+        <result property="departmentNumber" column="department_number" />
+    </resultMap>
+
+    <select id="findOne" parameterType="string" resultMap="empolyeeResultMap">
+    <![CDATA[
+        SELECT
+            employee_id,
+            company_mail,
+            my_mail,
+            basically,
+            membership,
+            employment_insurance,
+            health_insurance,
+            employee_pension,
+            upper_limit_time,
+            minimum_time,
+            getpaid,
+            remaining_paid,
+            hourly_wagea,
+            joining_time,
+            leave_time,
+            status,
+            deletion_category,
+            position_classification,
+            department_number
+        FROM
+            employee
+        WHERE
+            employee_id = #{todoId}
+    ]]>
+    </select>
+
+<!--
+
+    <resultMap id="todoResultMap" type="Todo">
+        <id property="todoId" column="todo_id" />
+        <result property="todoTitle" column="todo_title" />
+        <result property="finished" column="finished" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+
+    <select id="findOne" parameterType="string" resultMap="todoResultMap">
+    <![CDATA[
+        SELECT
+            todo_id,
+            todo_title,
+            finished,
+            created_at
+        FROM
+            todo
+        WHERE
+            todo_id = #{todoId}
+    ]]>
+    </select>
+
+    <select id="findAll" resultMap="todoResultMap">
+    <![CDATA[
+        SELECT
+            todo_id,
+            todo_title,
+            finished,
+            created_at
+        FROM
+            todo
+    ]]>
+    </select>
+
+    <insert id="create" parameterType="Todo">
+    <![CDATA[
+        INSERT INTO todo
+        (
+            todo_id,
+            todo_title,
+            finished,
+            created_at
+        )
+        VALUES
+        (
+            #{todoId},
+            #{todoTitle},
+            #{finished},
+            #{createdAt}
+        )
+    ]]>
+    </insert>
+
+    <update id="update" parameterType="Todo">
+    <![CDATA[
+        UPDATE
+            todo
+        SET
+            todo_title = #{todoTitle},
+            finished = #{finished},
+            created_at = #{createdAt}
+        WHERE
+            todo_id = #{todoId}
+    ]]>
+    </update>
+
+    <delete id="delete" parameterType="Todo">
+    <![CDATA[
+        DELETE FROM todo
+        WHERE
+            todo_id = #{todoId}
+    ]]>
+    </delete>
+
+    <select id="countByFinished" parameterType="boolean" resultType="long">
+    <![CDATA[
+        SELECT
+            COUNT(*)
+        FROM
+            todo
+        WHERE
+            finished = #{finished}
+    ]]>
+    </select>
+
+    <select id="exists" parameterType="string" resultType="long">
+    <![CDATA[
+        SELECT
+            COUNT(*)
+        FROM
+            todo
+        WHERE
+            todo_id = #{todoId}
+    ]]>
+    </select>
+
+-->
+
+</mapper>
