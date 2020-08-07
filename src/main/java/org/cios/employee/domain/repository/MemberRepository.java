@@ -1,24 +1,21 @@
 package org.cios.employee.domain.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.cios.employee.domain.model.Member;
 
 public interface MemberRepository {
 
-	Member findOne(String memberId);
-//
-//	List<Member> findAll();
-//
-//	long countByContainsName(String name);
-//
-//	List<Member> findPageByContainsName(String name, RowBounds rowBounds);
-//
-//	void createMember(Member creatingMember);
-//
-//	void createCredential(Member creatingMember);
-//
-//	boolean updateMember(Member updatingMember);
-//
-//	void deleteMember(String employeeId);
-//
-//	void deleteCredential(String employeeId);
+	Optional<Member> findById(String memberId);
+
+	List<Member> findAll();
+
+	void create(Member member);
+
+    boolean update(Member member);
+
+    void delete(Member member);
+
+    long countByFinished(boolean finished);
 }

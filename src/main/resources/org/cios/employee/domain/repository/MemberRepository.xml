@@ -27,7 +27,7 @@
         <result property="departmentNumber" column="department_number" />
     </resultMap>
 
-    <select id="findOne" parameterType="string" resultMap="memberResultMap">
+    <select id="findById" parameterType="string" resultMap="memberResultMap">
     <![CDATA[
         SELECT
             "member_id",
@@ -56,6 +56,111 @@
     ]]>
     </select>
 
+    <select id="findAll"  resultMap="memberResultMap">
+    <![CDATA[
+        SELECT
+            "member_id",
+            company_mail,
+            my_mail,
+            basically,
+            membership,
+            employment_insurance,
+            health_insurance,
+            member_pension,
+            upper_limit_time,
+            minimum_time,
+            getpaid,
+            remaining_paid,
+            hourly_wagea,
+            joining_time,
+            leave_time,
+            status,
+            deletion_category,
+            position_classification,
+            department_number
+        FROM
+            employee
+        WHERE
+            deletion_category is not null
+    ]]>
+    </select>
+
+    <insert id="create" parameterType="Member">
+    <![CDATA[
+        INSERT INTO employee
+        (
+            member_id,
+            company_mail,
+            my_mail,
+            basically,
+            membership,
+            employment_insurance,
+            health_insurance,
+            member_pension,
+            upper_limit_time,
+            minimum_time,
+            getpaid,
+            remaining_paid,
+            hourly_wagea,
+            joining_time,
+            leave_time,
+            status,
+            deletion_category,
+            position_classification,
+            department_number
+        )
+        VALUES
+        (
+            #{memberId},
+            #{companyMail},
+            #{myMail},
+            #{basically},
+            #{membership},
+            #{employmentInsurance},
+            #{healthInsurance},
+            #{employeePension},
+            #{upperLmitTime},
+            #{minimumTime},
+            #{getPaid},
+            #{remainingPaid},
+            #{hourlyWagea},
+            #{joiningTime},
+            #{leaveTime},
+            #{status},
+            #{deletionCategory},
+            #{positionClassification},
+            #{departmentNumber}
+        )
+    ]]>
+    </insert>
+
+    <update id="update" parameterType="Member">
+    <![CDATA[
+        UPDATE
+            employee
+        SET
+           company_mail = #{companyMail},
+            my_mail =  #{myMail},
+            basically = #{basically},
+            membership = #{membership},
+            employment_insurance = #{employmentInsurance},
+            health_insurance = #{healthInsurance},
+            member_pension = #{employeePension},
+            upper_limit_time =  #{upperLmitTime},
+            minimum_time = #{minimumTime},
+            getpaid = #{getPaid},
+            remaining_paid =  #{remainingPaid},
+            hourly_wagea =  #{hourlyWagea},
+            joining_time = #{joiningTime},
+            leave_time =  #{leaveTime},
+            status =  #{status},
+            deletion_category = #{deletionCategory},
+            position_classification = #{positionClassification},
+            department_number = #{departmentNumber}
+        WHERE
+            member_id = #{memberId}
+    ]]>
+    </update>
 <!--
 
     <resultMap id="todoResultMap" type="Todo">

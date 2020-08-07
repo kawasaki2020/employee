@@ -1,32 +1,73 @@
 package org.cios.employee.domain.service.impl;
 
+import java.util.List;
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import org.cios.employee.domain.model.Member;
 import org.cios.employee.domain.repository.MemberRepository;
 import org.cios.employee.domain.service.MemberService;
-import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
+import org.terasoluna.gfw.common.exception.BusinessException;
+import org.terasoluna.gfw.common.exception.ResourceNotFoundException;
+import org.terasoluna.gfw.common.message.ResultMessage;
+import org.terasoluna.gfw.common.message.ResultMessages;
 
-@Transactional
 @Service
+@Transactional
 public class MemberServiceImpl implements MemberService {
+	private static final long MAX_UNFINISHED_COUNT = 5;
+
 	@Inject
 	MemberRepository memberRepository;
 
 	@Inject
 	JodaTimeDateFactory dateFactory;
 
-	@Inject
-	Mapper beanMapper;
+	@Override
+	public Member getMember(String memberId) {
+		Member member = memberRepository.findById(memberId).orElse(null);
+		if (Objects.isNull(member)) {
+            ResultMessages messages = ResultMessages.error();
+            messages.add(ResultMessage.fromText("[E404] The requested Member is not found. (id=" + memberId + ")"));
+            throw new ResourceNotFoundException(messages);
+        }
+		return member;
+	}
 
-//	@Override
-//	@Transactional(readOnly = true)
-//	public List<Member> findAll() {
-//		return memberRepository.findAll();
-//	}
+	@Override
+	@Transactional(readOnly = true)
+	public List<Member> findAll() {
+		return memberRepository.findAll();
+	}
+
+	@Override
+	public Member createMember(Member creatingMember) {
+		//TODO
+		creatingMember.setMemberId("2020001");
+
+		memberRepository.create(creatingMember);
+
+		return creatingMember;
+	}
+
+    @Override
+	public Member finish(String memberId) {
+		Member member = getMember(memberId);
+		if (member.isFinished()) {
+			ResultMessages messages = ResultMessages.error();
+			messages.add(ResultMessage
+					.fromText("[E002] The requested Todo is already finished. (id="
+							+ memberId + ")"));
+			throw new BusinessException(messages);
+		}
+		member.setFinished(true);
+		memberRepository.update(member);
+		return member;
+	}
 //
 //	@Override
 //	@Transactional(readOnly = true)
@@ -43,43 +84,6 @@ public class MemberServiceImpl implements MemberService {
 //		return new PageImpl<Member>(members, pageable, total);
 //	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public Member getMember(String memberId) {
-		return memberRepository.findOne(memberId);
-	}
-//
-//	@Override
-//	public Member createMember(Member creatingMember) {
-//		MemberCredential creatingCredential = creatingMember
-//				.getCredential();
-//
-//		// get processing current date time
-//		DateTime currentDateTime = dateFactory.newDateTime();
-//
-//		creatingMember.setCreatedAt(currentDateTime);
-//		creatingMember.setLastModifiedAt(currentDateTime);
-//
-//		// decide sign id(email-address)
-//		String signId = creatingCredential.getSignId();
-//		if (!StringUtils.hasLength(signId)) {
-//			signId = creatingMember.getEmailAddress();
-//			creatingCredential.setSignId(signId.toLowerCase());
-//		}
-//
-//		// save member & member credential
-//		try {
-//
-//			// Registering member details
-//			memberRepository.createMember(creatingMember);
-//			// //Registering credential details
-//			memberRepository.createCredential(creatingMember);
-//			return creatingMember;
-//		} catch (DuplicateKeyException e) {
-//			// TODO
-//		}
-//		return creatingMember;
-//	}
 //
 //	@Override
 //	public Member updateMember(String employeeId, Member updatingMember) {

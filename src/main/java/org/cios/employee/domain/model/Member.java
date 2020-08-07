@@ -47,4 +47,6 @@ public class Member implements Serializable {
 	private String positionClassification;
 	//部門番号
 	private Integer departmentNumber;
+
+	private boolean finished;
 }
