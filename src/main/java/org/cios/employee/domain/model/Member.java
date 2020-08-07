@@ -10,7 +10,7 @@ import lombok.Data;
 public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// 社員番号 年度+三桁番号
-	private String memberId;
+	private Integer memberId;
 	//公司メール
 	private String companyMail;
 	//个人メール

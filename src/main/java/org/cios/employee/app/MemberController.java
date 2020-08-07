@@ -41,7 +41,7 @@ public class MemberController {
 
 	//http://localhost:8080/employee/getMember?memberId=1
 	@RequestMapping(value = "/getMember", method = RequestMethod.GET)
-	public String getMember(@RequestParam String memberId, Model model) {
+	public String getMember(@RequestParam Integer memberId, Model model) {
 		Member member = memberService.getMember(memberId);
 		model.addAttribute("member", member);
 		// TODO
