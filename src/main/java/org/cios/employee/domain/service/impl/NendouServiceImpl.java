@@ -24,10 +24,13 @@ public class NendouServiceImpl implements NendouService {
 			nendouDefault.setYear(LocalDate.now().getYear());
 			nendouDefault.setMenberNum(1);
 
-			createNendou(nendouDefault);
+			this.createNendou(nendouDefault);
 
 			return nendouDefault;
 		}
+		nendou.setMenberNum(nendou.getMenberNum() + 1);
+		this.updateNendou(nendou);
+
 		return nendou;
 	}
 
