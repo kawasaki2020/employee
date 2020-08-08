@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.cios.employee.domain.repository.NendouRepository">
+
+    <resultMap id="nendouResultMap" type=Nendou>
+        <id property="year" column="year" />
+        <result property="menberNum" column="menber_num" />
+    </resultMap>
+
+    <select id="findByYear" parameterType="string" resultMap="nendouResultMap">
+    <![CDATA[
+        SELECT
+            year,
+            menber_num
+        FROM
+            nendo
+        WHERE
+            year = #{year}
+    ]]>
+    </select>
+
+</mapper>

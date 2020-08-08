@@ -17,5 +17,4 @@ public interface MemberRepository {
 
 	void delete(Member member);
 
-	Integer findMaxMemberId();
 }

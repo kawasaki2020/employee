@@ -1,0 +1,30 @@
+-- Sequence: nendo_id_seq
+
+-- DROP SEQUENCE nendo_id_seq;
+
+CREATE SEQUENCE nendo_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE nendo_id_seq
+  OWNER TO postgres;
+
+
+  -- Table: nendo
+
+-- DROP TABLE nendo;
+
+CREATE TABLE nendo
+(
+  year integer NOT NULL,
+  menber_num integer NOT NULL,
+  id serial NOT NULL,
+  CONSTRAINT year_nendo_pkey PRIMARY KEY (year)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE nendo
+  OWNER TO postgres;

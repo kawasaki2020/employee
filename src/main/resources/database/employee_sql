@@ -1,14 +1,14 @@
--- Sequence: member_id_seq
+-- Sequence: employee_id_seq
 
--- DROP SEQUENCE member_id_seq;
+-- DROP SEQUENCE employee_id_seq;
 
-CREATE SEQUENCE member_id_seq
+CREATE SEQUENCE employee_id_seq
   INCREMENT 1
   MINVALUE 1
   MAXVALUE 9223372036854775807
   START 1
   CACHE 1;
-ALTER TABLE member_id_seq
+ALTER TABLE employee_id_seq
   OWNER TO postgres;
 
 
@@ -35,7 +35,7 @@ CREATE TABLE employee
   joining_time date, -- 入社時間
   leave_time date, -- 退社時間
   status character(1), -- 状態
-  deletion_category character(1), -- 削除区分
+  deletion_category boolean NOT NULL DEFAULT false, -- 削除区分
   position_classification integer, -- 1:試用期/2:社員/3:主任/4:マネージャー/5:副部長/6:部長/7:本部長/8:役員/9:社長
   department_number integer, -- 部門番号
   created timestamp without time zone NOT NULL DEFAULT now(),

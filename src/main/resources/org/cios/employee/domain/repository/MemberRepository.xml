@@ -30,7 +30,7 @@
     <select id="findById" parameterType="string" resultMap="memberResultMap">
     <![CDATA[
         SELECT
-            "member_id",
+            member_id,
             company_mail,
             my_mail,
             basically,
@@ -59,7 +59,7 @@
     <select id="findAll"  resultMap="memberResultMap">
     <![CDATA[
         SELECT
-            "member_id",
+            member_id,
             company_mail,
             my_mail,
             basically,
@@ -154,7 +154,6 @@
             joining_time = #{joiningTime},
             leave_time =  #{leaveTime},
             status =  #{status},
-            deletion_category = #{deletionCategory},
             position_classification = #{positionClassification},
             department_number = #{departmentNumber}
         WHERE
@@ -164,19 +163,11 @@
 
     <delete id="delete" parameterType="Member">
     <![CDATA[
-        DELETE FROM employee
+        UPDATE  employee
+         deletion_category = true
         WHERE
             member_id = #{memberId}
     ]]>
     </delete>
-
-     <select id="findMaxMemberId"  resultType="integer">
-     <![CDATA[
-        SELECT
-            COALESCE(max(member_id), 0) + 1
-        FROM
-            employee
-    ]]>
-    </select>
 
 </mapper>

@@ -42,7 +42,7 @@ public class MemberForm implements Serializable {
 	//状態
 	private String status;
 	//削除区分
-	private String deletionCategory;
+	private Boolean deletionCategory;
 	//職位区分
 	private String positionClassification;
 	//部門番号

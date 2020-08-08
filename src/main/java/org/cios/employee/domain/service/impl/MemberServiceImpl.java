@@ -8,7 +8,9 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cios.employee.domain.model.Member;
+import org.cios.employee.domain.model.Nendou;
 import org.cios.employee.domain.repository.MemberRepository;
+import org.cios.employee.domain.repository.NendouRepository;
 import org.cios.employee.domain.service.MemberService;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Inject
 	MemberRepository memberRepository;
+
+	@Inject
+	NendouRepository nendouRepository;
 
 	@Override
 	public Member getMember(Integer memberId) {
@@ -43,10 +48,17 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member createMember(Member creatingMember) {
-		Integer memberId = memberRepository.findMaxMemberId();
-		String memberIdstrs = Integer.toString(LocalDate.now().getYear())
-				+ StringUtils.leftPad(Integer.toString(memberId), 3, "0");
-		creatingMember.setMemberId(new Integer(memberIdstrs));
+		Nendou nendou = nendouRepository.findByYear(LocalDate.now().getYear()).orElseGet(()-> {
+			Nendou nendouDefault =new Nendou();
+			nendouDefault.setYear(LocalDate.now().getYear());
+			nendouDefault.setMenberNum(1);
+			return nendouDefault;
+		});
+
+		String memberIdstr = Integer.toString(nendou.getYear())
+				+ StringUtils.leftPad(Integer.toString(nendou.getMenberNum()), 3, "0");
+
+		creatingMember.setMemberId(new Integer(memberIdstr));
 		memberRepository.create(creatingMember);
 
 		return creatingMember;
