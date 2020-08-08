@@ -5,7 +5,7 @@
 
 <mapper namespace="org.cios.employee.domain.repository.NendouRepository">
 
-    <resultMap id="nendouResultMap" type=Nendou>
+    <resultMap id="nendouResultMap" type="Nendou">
         <id property="year" column="year" />
         <result property="menberNum" column="menber_num" />
     </resultMap>

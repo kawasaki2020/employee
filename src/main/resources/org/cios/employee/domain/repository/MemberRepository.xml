@@ -53,6 +53,7 @@
             employee
         WHERE
             member_id = #{memberId}
+            AND deletion_category IS FALSE
     ]]>
     </select>
 
@@ -81,7 +82,7 @@
         FROM
             employee
         WHERE
-            deletion_category is not null
+            deletion_category IS FALSE
     ]]>
     </select>
 
