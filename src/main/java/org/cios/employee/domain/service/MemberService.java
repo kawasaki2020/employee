@@ -1,5 +1,7 @@
 package org.cios.employee.domain.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.cios.employee.domain.model.Member;
@@ -14,4 +16,6 @@ public interface MemberService {
 	Member updateMember(Member updatingMember);
 
 	void deleteMember(Integer employeeId);
+
+	void csvUpload(File file, String[] headers) throws IOException;
 }
