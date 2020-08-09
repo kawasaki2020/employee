@@ -20,6 +20,7 @@ CREATE TABLE employee
 (
   id serial NOT NULL,
   member_id integer NOT NULL, -- 社員番号 年度+三桁番号
+  member_name character varying(256) NOT NULL, -- 社員名称
   company_mail character varying(256), -- 公司メール
   my_mail character varying(256), -- 个人メール
   basically double precision, -- 基本給
@@ -29,7 +30,7 @@ CREATE TABLE employee
   member_pension double precision, -- 厚生年金
   upper_limit_time integer, -- 上限時間
   minimum_time integer, -- 下限時間
-  getpaid boolean, -- 有給取得
+  getpaid double precision, -- 有給取得
   remaining_paid double precision, -- 有給残
   hourly_wagea double precision, -- 時給
   joining_time date, -- 入社時間
@@ -48,6 +49,7 @@ WITH (
 ALTER TABLE employee
   OWNER TO postgres;
 COMMENT ON COLUMN employee.member_id IS '社員番号 年度+三桁番号';
+COMMENT ON COLUMN employee.member_name IS '社員名称';
 COMMENT ON COLUMN employee.company_mail IS '公司メール';
 COMMENT ON COLUMN employee.my_mail IS '个人メール';
 COMMENT ON COLUMN employee.basically IS '基本給';
