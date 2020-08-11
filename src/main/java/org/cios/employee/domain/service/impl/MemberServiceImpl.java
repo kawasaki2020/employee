@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.cios.employee.domain.model.Member;
 import org.cios.employee.domain.model.Nendou;
 import org.cios.employee.domain.repository.MemberRepository;
-import org.cios.employee.domain.service.ArticleService;
 import org.cios.employee.domain.service.MemberService;
 import org.cios.employee.domain.service.NendouService;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -32,9 +31,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Inject
 	NendouService nendouService;
-
-	@Inject
-	ArticleService articleService;
 
 	@Override
 	@Transactional(readOnly = true)

@@ -4,14 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.inject.Inject;
 
 import org.apache.commons.csv.CSVRecord;
 import org.cios.employee.app.form.FileUploadForm;
-import org.cios.employee.domain.model.Member;
 import org.cios.employee.domain.service.ArticleService;
 import org.cios.employee.domain.service.MemberService;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
 import com.opencsv.CSVWriter;
-
 
 @RequestMapping("article")
 @Controller
@@ -113,38 +110,16 @@ public class ArticleController {
 	@RequestMapping(value = "downloadCSV", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> upload(BindingResult result, RedirectAttributes redirectAttributes)
 			throws IOException {
-		// TODO
-		List<Member> members = memberService.findAll();
-		String fileName = UUID.randomUUID().toString();;
+
+		String fileName = UUID.randomUUID().toString();
+		;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(baos));
 		csvWriter.writeNext(headers);
-		for(Member member : members)
-	       {
-			String[] strArray = new String[Member.class.getDeclaredFields().length] ;
-			strArray[0] = Optional.ofNullable(member.getMemberId()).map(memberId -> Integer.toString(memberId)).orElse("");
-			strArray[1] = Optional.ofNullable(member.getCompanyMail()).orElse("");
-			strArray[2] = Optional.ofNullable(member.getMyMail()).orElse("");
-			strArray[3] = Optional.ofNullable(member.getBasically()).map(basically -> Double.toString(basically)).orElse("");
-			strArray[4] = Optional.ofNullable(member.getMembership()).orElse("");
-			strArray[5] = Optional.ofNullable(member.getEmploymentInsurance()).map(employmentInsurance -> Double.toString(employmentInsurance)).orElse("");
-			strArray[6] = Optional.ofNullable(member.getHealthInsurance()).map(healthInsurance -> Double.toString(healthInsurance)).orElse("");
-			strArray[7] = Optional.ofNullable(member.getMemberPension()).map(memberPension -> Double.toString(memberPension)).orElse("");
-			strArray[8] = Optional.ofNullable(member.getUpperLmitTime()).map(upperLmitTime -> Integer.toString(upperLmitTime)).orElse("");
-			strArray[8] = Optional.ofNullable(member.getMinimumTime()).map(minimumTime -> Integer.toString(minimumTime)).orElse("");
-			strArray[8] = Optional.ofNullable(member.getGetPaid()).map(getPaid -> Boolean.toString(getPaid)).orElse("");
-			strArray[7] = Optional.ofNullable(member.getRemainingPaid()).map(remainingPaid -> Double.toString(remainingPaid)).orElse("");
-			strArray[7] = Optional.ofNullable(member.getHourlyWagea()).map(hourlyWagea -> Double.toString(hourlyWagea)).orElse("");
-			// TODO
-			strArray[7] = "";
-			strArray[7] = "";
-			strArray[2] = Optional.ofNullable(member.getStatus()).orElse("");
-			strArray[8] = Optional.ofNullable(member.getDeletionCategory()).map(deletionCategory -> Boolean.toString(deletionCategory)).orElse("");
-			strArray[2] = Optional.ofNullable(member.getPositionClassification()).orElse("");
-			strArray[0] = Optional.ofNullable(member.getDepartmentNumber()).map(departmentNumber -> Integer.toString(departmentNumber)).orElse("");
-
-			csvWriter.writeNext(strArray);
-	       }
+		List<String[]> members = articleService.getCSVData();
+		for (String[] member : members) {
+			csvWriter.writeNext(member);
+		}
 		csvWriter.close();
 
 		HttpHeaders httpHeaders = new HttpHeaders();

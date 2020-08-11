@@ -9,4 +9,6 @@ import org.apache.commons.csv.CSVRecord;
 public interface ArticleService {
 
 	List<CSVRecord> readCSV(InputStream inputStream, String[] headers) throws IOException;
+
+	public List<String[]> getCSVData();
 }
