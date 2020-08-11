@@ -71,27 +71,4 @@ public class MemberController {
 		return "redirect:/member/list";
 	}
 
-	//	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
-	//	public String home(Locale locale, Model model) {
-	//		logger.info("Welcome home! The client locale is {}.", locale);
-	//
-	//		Date date = new Date();
-	//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
-	//				DateFormat.LONG, locale);
-	//
-	//		String formattedDate = dateFormat.format(date);
-	//
-	//		model.addAttribute("serverTime", formattedDate);
-	//
-	//		return "welcome/home";
-	//	}
-	//
-	//	@GetMapping("list")
-	//	public String list(Model model) {
-	//		Collection<Member> Members = memberService.findAll();
-	//		model.addAttribute("Members", Members);
-	//		return "Member/list";
-	//	}
-	//
-
 }
