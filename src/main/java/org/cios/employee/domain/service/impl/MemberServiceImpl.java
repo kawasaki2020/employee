@@ -1,6 +1,5 @@
 package org.cios.employee.domain.service.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -86,8 +85,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void csvUpload(File file, String[] headers) throws IOException {
-		List<CSVRecord> records = articleService.readCSV(file, headers);
+	public void csvUpload(List<CSVRecord> records, String[] headers) throws IOException {
 		for (CSVRecord record : records) {
 			Member member = new Member();
 

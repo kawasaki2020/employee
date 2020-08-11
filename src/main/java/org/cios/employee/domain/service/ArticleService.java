@@ -1,12 +1,12 @@
 package org.cios.employee.domain.service;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.commons.csv.CSVRecord;
 
 public interface ArticleService {
 
-	List<CSVRecord> readCSV(File file, String[] headers) throws IOException;
+	List<CSVRecord> readCSV(InputStream inputStream, String[] headers) throws IOException;
 }
