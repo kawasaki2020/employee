@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
 import com.opencsv.CSVWriter;
+import com.opencsv.ICSVWriter;
 
 @Controller
 public class ArticleController {
@@ -85,7 +86,6 @@ public class ArticleController {
 			result.rejectValue(uploadFile.getName(), "e.xx.at.6004", new Object[] { uploadAllowableFileSize }, null);
 			return "article/uploadForm";
 		}
-		//  TODO
 
 		try {
 			List<CSVRecord> records = articleService.readCSV(uploadFile.getInputStream(), headers);
@@ -98,23 +98,24 @@ public class ArticleController {
 		redirectAttributes.addFlashAttribute(ResultMessages.success().add(
 				"i.xx.at.0001"));
 
-		return "redirect:/uploadForm";
+		return "redirect:/uploadComplete";
 	}
 
-	@RequestMapping(value = "uploadCSV", method = RequestMethod.GET, params = "complete")
+	@RequestMapping(value = "uploadComplete", method = RequestMethod.GET)
 	public String uploadComplete() {
 		return "article/uploadComplete";
 	}
 
 	@RequestMapping(value = "downloadCSV", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> upload(BindingResult result, RedirectAttributes redirectAttributes)
+	public ResponseEntity<byte[]> downloadCSV()
 			throws IOException {
 
-		String fileName = UUID.randomUUID().toString();
-		;
+		String fileName = UUID.randomUUID().toString() + ".csv";
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(baos));
+		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(baos), ICSVWriter.DEFAULT_SEPARATOR,
+				ICSVWriter.NO_QUOTE_CHARACTER, ICSVWriter.NO_ESCAPE_CHARACTER, ICSVWriter.DEFAULT_LINE_END);
 		csvWriter.writeNext(headers);
+
 		List<String[]> members = articleService.getCSVData();
 		for (String[] member : members) {
 			csvWriter.writeNext(member);

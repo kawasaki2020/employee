@@ -2,6 +2,7 @@ package org.cios.employee.domain.service.impl;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional(readOnly = true)
 	public Member getMember(Integer memberId) {
-		Member member = memberRepository.findById(memberId).orElse(null);
+		Member member = memberRepository.findById(memberId);
 		if (Objects.isNull(member)) {
 			ResultMessages messages = ResultMessages.error();
 			messages.add(ResultMessage.fromText("[E404] The requested Member is not found. (id=" + memberId + ")"));
@@ -99,19 +100,27 @@ public class MemberServiceImpl implements MemberService {
 			Optional.ofNullable(record.get("remainingPaid")).ifPresent(remainingPaid -> member.setRemainingPaid(Double.parseDouble(remainingPaid)));
 			Optional.ofNullable(record.get("hourlyWagea")).ifPresent(hourlyWagea -> member.setHourlyWagea(Double.parseDouble(hourlyWagea)));
 
-			// TODO
-			//member.setJoiningTime(record.get("joiningTime"));
-			Optional.ofNullable(record.get("joiningTime")).ifPresent(joiningTime -> member.setJoiningTime(LocalDate.now()));
-			// TODO
-			//member.setLeaveTime(record.get("leaveTime"));
-			Optional.ofNullable(record.get("leaveTime")).ifPresent(leaveTime -> member.setLeaveTime(LocalDate.now()));
+			DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("yyyyMMdd");
+			Optional.ofNullable(record.get("joiningTime")).ifPresent(joiningTime -> member.setJoiningTime(LocalDate.parse(joiningTime, dateFormatter)));
+			Optional.ofNullable(record.get("leaveTime")).ifPresent(leaveTime -> member.setLeaveTime(LocalDate.parse(leaveTime, dateFormatter)));
 
 			Optional.ofNullable(record.get("status")).ifPresent(status -> member.setStatus(Integer.parseInt(status)));
 			Optional.ofNullable(record.get("deletionCategory")).ifPresent(deletionCategory -> member.setDeletionCategory(Boolean.parseBoolean(deletionCategory)));
 			Optional.ofNullable(record.get("positionClassification")).ifPresent(positionClassification -> member.setPositionClassification(Integer.parseInt(positionClassification)));
 			Optional.ofNullable(record.get("departmentNumber")).ifPresent(departmentNumber -> member.setDepartmentNumber(Integer.parseInt(departmentNumber)));
 
-			createMember(member);
+			if (Objects.isNull(member.getMemberId()) ) {
+				this.createMember(member);
+				return;
+			}
+
+			if (Objects.nonNull(memberRepository.findById(member.getMemberId()))) {
+				memberRepository.update(member);
+				return;
+			}
+
+			this.createMember(member);
+			return;
 		}
 	}
 

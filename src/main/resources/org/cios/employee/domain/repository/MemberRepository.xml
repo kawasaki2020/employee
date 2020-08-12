@@ -27,7 +27,7 @@
         <result property="departmentNumber" column="department_number" />
     </resultMap>
 
-    <select id="findById" parameterType="string" resultMap="memberResultMap">
+    <select id="findById" parameterType="integer" resultMap="memberResultMap">
     <![CDATA[
         SELECT
             member_id,

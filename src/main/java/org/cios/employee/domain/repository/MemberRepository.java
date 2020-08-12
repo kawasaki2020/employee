@@ -1,13 +1,12 @@
 package org.cios.employee.domain.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.cios.employee.domain.model.Member;
 
 public interface MemberRepository {
 
-	Optional<Member> findById(Integer memberId);
+	Member  findById(Integer memberId);
 
 	List<Member> findAll();
 
