@@ -29,7 +29,6 @@ import org.terasoluna.gfw.common.message.ResultMessages;
 
 import com.opencsv.CSVWriter;
 
-@RequestMapping("article")
 @Controller
 public class ArticleController {
 
@@ -51,7 +50,7 @@ public class ArticleController {
 		return new FileUploadForm();
 	}
 
-	@RequestMapping(value = "upload", method = RequestMethod.GET, params = "form")
+	@RequestMapping(value = "upload", method = RequestMethod.GET)
 	public String uploadForm() {
 		return "article/uploadForm";
 	}
@@ -99,7 +98,7 @@ public class ArticleController {
 		redirectAttributes.addFlashAttribute(ResultMessages.success().add(
 				"i.xx.at.0001"));
 
-		return "redirect:/article/upload?complete";
+		return "redirect:/uploadForm";
 	}
 
 	@RequestMapping(value = "uploadCSV", method = RequestMethod.GET, params = "complete")

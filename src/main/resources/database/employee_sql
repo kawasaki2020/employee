@@ -16,6 +16,7 @@ ALTER TABLE employee_id_seq
 
 -- DROP TABLE employee;
 
+
 CREATE TABLE employee
 (
   id serial NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE employee
   hourly_wagea double precision, -- 時給
   joining_time date, -- 入社時間
   leave_time date, -- 退社時間
-  status character(1), -- 状態
+  status integer, -- 状態
   deletion_category boolean NOT NULL DEFAULT false, -- 削除区分
   position_classification integer, -- 1:試用期/2:社員/3:主任/4:マネージャー/5:副部長/6:部長/7:本部長/8:役員/9:社長
   department_number integer, -- 部門番号
@@ -66,4 +67,3 @@ COMMENT ON COLUMN employee.status IS '状態';
 COMMENT ON COLUMN employee.deletion_category IS '削除区分';
 COMMENT ON COLUMN employee.position_classification IS '1:試用期/2:社員/3:主任/4:マネージャー/5:副部長/6:部長/7:本部長/8:役員/9:社長';
 COMMENT ON COLUMN employee.department_number IS '部門番号';
-

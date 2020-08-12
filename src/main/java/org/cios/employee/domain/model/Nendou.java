@@ -11,8 +11,8 @@ public class Nendou implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// 年度
-	Integer year;
+	private Integer year;
 
 	//社員番号
-	Integer menberNum;
+	private Integer menberNum;
 }

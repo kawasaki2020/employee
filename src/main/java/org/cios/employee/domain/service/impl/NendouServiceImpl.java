@@ -18,7 +18,7 @@ public class NendouServiceImpl implements NendouService {
 
 	@Override
 	public Nendou getNendou(Integer year) {
-		Nendou nendou = nendouRepository.findByYear(year).orElse(null);
+		Nendou nendou = nendouRepository.findByYear(year);
 		if (Objects.isNull(nendou)) {
 			Nendou nendouDefault = new Nendou();
 			nendouDefault.setYear(LocalDate.now().getYear());

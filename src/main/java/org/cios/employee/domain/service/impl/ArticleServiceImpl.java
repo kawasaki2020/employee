@@ -25,7 +25,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public List<CSVRecord> readCSV(InputStream inputStream, String[] headers) throws IOException {
-		CSVFormat formator = CSVFormat.DEFAULT.withHeader(headers);
+		CSVFormat formator = CSVFormat.DEFAULT.withHeader(headers).withSkipHeaderRecord().withIgnoreEmptyLines().withTrim();
 		CSVParser parser = new CSVParser(new InputStreamReader(inputStream), formator);
 		List<CSVRecord> records = parser.getRecords();
 		parser.close();
@@ -55,9 +55,9 @@ public class ArticleServiceImpl implements ArticleService {
 			// TODO
 			strArray[7] = "";
 			strArray[7] = "";
-			strArray[2] = Optional.ofNullable(member.getStatus()).orElse("");
+			strArray[2] = Optional.ofNullable(member.getStatus()).map(status -> Integer.toString(status)).orElse("");
 			strArray[8] = Optional.ofNullable(member.getDeletionCategory()).map(deletionCategory -> Boolean.toString(deletionCategory)).orElse("");
-			strArray[2] = Optional.ofNullable(member.getPositionClassification()).orElse("");
+			strArray[2] = Optional.ofNullable(member.getPositionClassification()).map(positionClassification -> Integer.toString(positionClassification)).orElse("");
 			strArray[0] = Optional.ofNullable(member.getDepartmentNumber()).map(departmentNumber -> Integer.toString(departmentNumber)).orElse("");
 
 			listArr.add(strArray);

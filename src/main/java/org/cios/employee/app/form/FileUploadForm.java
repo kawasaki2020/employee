@@ -11,6 +11,4 @@ import lombok.Data;
 public class FileUploadForm implements Serializable {
 
 	private MultipartFile file;
-
-	private String description;
 }

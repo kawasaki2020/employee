@@ -13,7 +13,7 @@
         <result property="membership" column="membership" />
         <result property="employmentInsurance" column="employment_insurance" />
         <result property="healthInsurance" column="health_insurance" />
-        <result property="employeePension" column="member_pension" />
+        <result property="memberPension" column="member_pension" />
         <result property="upperLmitTime" column="upper_limit_time" />
         <result property="minimumTime" column="minimum_time" />
         <result property="getPaid" column="getpaid" />
@@ -119,7 +119,7 @@
             #{membership},
             #{employmentInsurance},
             #{healthInsurance},
-            #{employeePension},
+            #{memberPension},
             #{upperLmitTime},
             #{minimumTime},
             #{getPaid},
@@ -146,7 +146,7 @@
             membership = #{membership},
             employment_insurance = #{employmentInsurance},
             health_insurance = #{healthInsurance},
-            member_pension = #{employeePension},
+            member_pension = #{memberPension},
             upper_limit_time =  #{upperLmitTime},
             minimum_time = #{minimumTime},
             getpaid = #{getPaid},

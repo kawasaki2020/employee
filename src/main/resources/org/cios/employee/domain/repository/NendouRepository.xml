@@ -10,7 +10,7 @@
         <result property="menberNum" column="menber_num" />
     </resultMap>
 
-    <select id="findByYear" parameterType="string" resultMap="nendouResultMap">
+    <select id="findByYear" parameterType="integer" resultMap="nendouResultMap">
     <![CDATA[
         SELECT
             year,
@@ -21,5 +21,31 @@
             year = #{year}
     ]]>
     </select>
+
+    <insert id="create" parameterType="Nendou">
+    <![CDATA[
+        INSERT INTO nendo
+        (
+            year,
+            menber_num
+        )
+        VALUES
+        (
+            #{year},
+            #{menberNum}
+        )
+    ]]>
+    </insert>
+
+    <update id="update" parameterType="Nendou">
+    <![CDATA[
+        UPDATE
+            nendo
+        SET
+           menber_num = #{menberNum}
+        WHERE
+            year = #{year}
+    ]]>
+    </update>
 
 </mapper>

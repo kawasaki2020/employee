@@ -40,11 +40,11 @@ public class Member implements Serializable {
 	//退社時間
 	private LocalDate leaveTime;
 	//状態
-	private String status;
+	private Integer status;
 	//削除区分
 	private Boolean deletionCategory;
 	//職位区分
-	private String positionClassification;
+	private Integer positionClassification;
 	//部門番号
 	private Integer departmentNumber;
 
