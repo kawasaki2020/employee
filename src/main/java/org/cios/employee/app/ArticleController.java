@@ -3,8 +3,9 @@ package org.cios.employee.app;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -51,12 +52,12 @@ public class ArticleController {
 		return new FileUploadForm();
 	}
 
-	@RequestMapping(value = "upload", method = RequestMethod.GET)
+	@RequestMapping(value = "uploadCSV", method = RequestMethod.GET)
 	public String uploadForm() {
 		return "article/uploadForm";
 	}
 
-	@RequestMapping(value = "upload", method = RequestMethod.POST)
+	@RequestMapping(value = "uploadCSV", method = RequestMethod.POST)
 	public String upload(@Validated FileUploadForm form,
 			BindingResult result, RedirectAttributes redirectAttributes) {
 
@@ -110,7 +111,6 @@ public class ArticleController {
 	public ResponseEntity<byte[]> downloadCSV()
 			throws IOException {
 
-		String fileName = UUID.randomUUID().toString() + ".csv";
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		CSVWriter csvWriter = new CSVWriter(new OutputStreamWriter(baos), ICSVWriter.DEFAULT_SEPARATOR,
 				ICSVWriter.NO_QUOTE_CHARACTER, ICSVWriter.NO_ESCAPE_CHARACTER, ICSVWriter.DEFAULT_LINE_END);
@@ -122,8 +122,12 @@ public class ArticleController {
 		}
 		csvWriter.close();
 
-		HttpHeaders httpHeaders = new HttpHeaders();
+		DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("yyyyMMdd_HH-mm-ss");
+		LocalDateTime sysDatetime = LocalDateTime.now();
+		String fileName = "employee_"+ sysDatetime.format(dateFormatter) + ".csv";
 		String downloadFielName = new String(fileName.getBytes("UTF-8"), "UTF-8");
+
+		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentDispositionFormData("attachment", downloadFielName);
 		httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
