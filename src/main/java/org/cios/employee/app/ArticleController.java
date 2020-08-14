@@ -52,6 +52,7 @@ public class ArticleController {
 		return new FileUploadForm();
 	}
 
+	// TODO http://localhost:8080/employee/uploadCSV
 	@RequestMapping(value = "uploadCSV", method = RequestMethod.GET)
 	public String uploadForm() {
 		return "article/uploadForm";
@@ -91,8 +92,8 @@ public class ArticleController {
 		try {
 			List<CSVRecord> records = articleService.readCSV(uploadFile.getInputStream(), headers);
 			memberService.csvUpload(records, headers);
-		} catch (IOException e) {
-			result.rejectValue(uploadFile.getName(), "e.xx.at.6004", new Object[] { uploadAllowableFileSize }, null);
+		} catch (Exception e) {
+			result.rejectValue(uploadFile.getName(), null, null, e.getMessage());
 			return "article/uploadForm";
 		}
 
@@ -106,7 +107,7 @@ public class ArticleController {
 	public String uploadComplete() {
 		return "article/uploadComplete";
 	}
-
+	// TODO http://localhost:8080/employee/downloadCSV
 	@RequestMapping(value = "downloadCSV", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> downloadCSV()
 			throws IOException {
